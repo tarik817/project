@@ -1,5 +1,8 @@
 <?php
 class Auth{
-	function 
+	function check_data($name, $email){
+		
+
+	}
 
 }
