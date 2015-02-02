@@ -1,0 +1,25 @@
+*{
+	margin: 0;
+	padding: 0;
+	outline:none;
+}
+body{
+background: black;
+    font:14px Arial, Tahoma, sans-serif; 
+}
+a{
+	text-decoration:none;
+}
+.page_align{
+	width: 1200px;
+	margin:0px auto;
+    overflow: hidden;
+    background: gray;
+}
+.clr{
+    clear:both;
+}
+.heder{
+	border: solid 1px gray;
+	height: 200px;
+}
