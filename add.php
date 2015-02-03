@@ -24,7 +24,7 @@ session_start();
         </div>
         <div class="content">
             <?php
-            include_once "inc/content.inc.php";
+            include_once "inc/add_cont.inc.php";
             ?>
         </div>
         <div class ="footer">

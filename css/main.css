@@ -4,22 +4,42 @@
 	outline:none;
 }
 body{
-background: black;
+background: #999999;
     font:14px Arial, Tahoma, sans-serif; 
 }
 a{
 	text-decoration:none;
 }
 .page_align{
-	width: 1200px;
+	width: 1000px;
 	margin:0px auto;
     overflow: hidden;
     background: gray;
+    overflow: hidden;
 }
 .clr{
     clear:both;
 }
 .heder{
+	padding: 10px;
 	border: solid 1px gray;
-	height: 200px;
+	height: 150px;
+	background: #999966;
+}
+.sidebar{
+	padding: 10px;
+	float: left;	
+	height: 1000px;
+	width: 200px;
+	float: left;
+	border: solid 1px gray;
+	background: #CCCCCC;
+}
+.content{
+	padding: 10px;
+	width: 1000px;
+	height: 1000px;
+	border: solid 1px gray;
+	background: #666666;
+	margin: right;
 }
