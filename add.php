@@ -1,5 +1,6 @@
 <?php
 session_start();
+if (isset($_SESSION['user'])) {
 ?>
 <!DOCTYPE html>
 <html>
@@ -39,3 +40,8 @@ session_start();
 
 </body>
 </html>
+<?php
+}else{
+header("Location: index.php");
+}
+?>
