@@ -12,24 +12,24 @@ session_start();
     <div class="page_align">
         <div class ="heder">
             <?php
-            include "inc/heder.inc.php";
-            include "log_and_reg/reg_and_log.php";
+            include_once "inc/heder.inc.php";
+            include_once "log_and_reg/reg_and_log.php";
             ?>
 
         </div>
         <div class="sidebar">
             <?php
-            include "inc/sidebar.inc.php";
+            include_once "inc/sidebar.inc.php";
             ?>
         </div>
         <div class="content">
             <?php
-            include "inc/content.inc.php";
+            include_once "inc/content.inc.php";
             ?>
         </div>
         <div class ="footer">
             <?php
-            include "inc/footer.inc.php";
+            include_once "inc/footer.inc.php";
             ?>
         </div>
     

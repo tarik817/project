@@ -1,2 +1,5 @@
 <?php
-$connect = new PDO('mysql:host=localhost;dbname=users', $user, $pass);
+$user="root"
+$pass="111"
+$connect = new PDO('mysqli:host=localhost;dbname=test', $user, $pass);
+?>

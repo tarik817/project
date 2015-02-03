@@ -1,4 +1,4 @@
-<form method="post" action="">
+<form method="post" action="controller.php">
 	<label>Name<br><input type="text" id="name"> </label><br>
 	<label>e-mail<br><input type="text" id="email"> </label><br>
 	<label>Password<br><input type="password" id="pass"> </label><br>
