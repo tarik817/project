@@ -17,8 +17,11 @@ if(isset($_POST['add_article'])){
 	$obj= new Article();
 	$res=$obj->push_article($title, $content, $db);
 	if($res ==true){
-		//ЗРОБИТИ РЕДІРЕКТ НА СТОРІНКУ ПЕРЕГЛЯДУ МАТЕРІАЛУ ЗАМІСТЬ ГОЛОВНОЇ СТОРІНКИ
-		header("Location: ../index.php");
+		$id_obj = $db->query("SELECT LAST_INSERT_ID()");
+ 		$id = $id_obj->fetch();
+ 		$id_obj->closeCursor(); 
+		header("Location: ../viev.php?id=".$id[0]);
+		exit(); 
 	}
 
 
