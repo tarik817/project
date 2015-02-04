@@ -4,7 +4,7 @@
 	outline:none;
 }
 body{
-background: #999999;
+background: #FFFFFF;
     font:14px Arial, Tahoma, sans-serif; 
 }
 a{
@@ -24,7 +24,7 @@ a{
 	padding: 10px;
 	border: solid 1px gray;
 	height: 150px;
-	background: #999966;
+	background: #99CCCC;
 }
 .sidebar{
 	padding: 10px;
@@ -33,13 +33,13 @@ a{
 	width: 200px;
 	float: left;
 	border: solid 1px gray;
-	background: #CCCCCC;
+	background: #6699FF;
 }
 .content{
 	padding: 10px;
 	width: 1000px;
 	height: 1000px;
 	border: solid 1px gray;
-	background: #666666;
+	background: #CCCCFF;
 	margin: right;
 }
