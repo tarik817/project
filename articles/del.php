@@ -1,32 +1,30 @@
 <?php
-if(isset($_GET['id'])) && is_numeric($_GET['id']))){
-	confirm_del();
+if(isset($_GET['id'])&& is_numeric($_GET['id'])){
+
+	$id = $_GET['id'];
+	$d = del($id);
+	header( "Location: .." );
 
 }
 
+function del($id){
+	include_once "../inc/db.inc.php";
 
+	//Connect to DB.
+	try {
 
-function confirm_del(){
+			$db = new PDO ("$db_info", "$db_user", "$db_pass"); 
+		
+		} catch (PDOException $e) {
+		
+			print "Error!: " . $e->getMessage() . "<br/>";
+    		die();
+		}
 
-return <<<FORM
-<form action="/simple_blog/admin.php" method="post">
-	<fieldset>
-		<legend>Are You Sure?</legend>
-		<p>Are you sure you want to delete the entry
-		"$e[title]"?
-		</p>
-		<input type="submit" name="submit" value="Yes" />
-		<input type="submit" name="submit" value="No" />
-		<input type="hidden" name="action" value="delete" />
-		<input type="hidden" name="url" value="$url" />
-	</fieldset>
-</form>
-FORM;
-
-
-}
+	$sql = "DELETE FROM articles WHERE articles_id = $id LIMIT 1";
 	
+	$del = $db->prepare($sql);
+	$del->execute();
 
-
-
+}
 ?>

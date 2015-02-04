@@ -16,6 +16,22 @@ class Article{
 	
 	}
 
+	function update_article($id, $title, $content, $db){
+
+		$time = time();
+
+		$sql = "UPDATE articles 
+		SET articles_title = '$title',
+		articles_content = '$content',
+		articles_data = '$time' WHERE id='$id' LIMIT 1";
+		
+		$push = $db->prepare($sql);
+		$push->execute(array($title, $content, $time, $id));
+ 		$push->closeCursor(); 
+ 		return true;
+
+	}
+
 	function current_article ($id, $db){
 
 		$sql = "SELECT * FROM articles WHERE articles_id = '".$id."'";
@@ -28,6 +44,8 @@ class Article{
 	}
 
 	function fetch_articles($db){
+
+		$articles = NULL;
 
 		$sql = "SELECT * FROM articles";
 

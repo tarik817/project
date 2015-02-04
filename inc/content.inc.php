@@ -14,8 +14,17 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
 		<div><p>Author: <?php echo $res["articles_author"]; ?></p></div>
 		<div><p>Date of adding: <?php echo date("F j, Y, g:i a",$res["articles_data"]); ?></p></div>
 		<div>
-			<a href="#">Edit</a>
-			<a href="articles/del.php?=<?php echo $res['articles_id']; ?> ">Delete</a>
+
+			<?php 
+
+			if(isset($_SESSION['user'])){
+				if ($_SESSION['user'] == $res['articles_author']){ ?>
+					<a href="add.php?show=<?php echo $res['articles_id']; ?>">Edit</a>
+					<a href="articles/del.php?id=<?php echo $res['articles_id']; ?> ">Delete</a>
+			<?php 
+				}
+			} 
+			?>
 		</div>
 	</div>
 
@@ -27,6 +36,7 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
 	include_once("articles/controler.php");
 	$obj = new Control();
 	$art = $obj->expres_all();
+	if (!empty($art)){
 
 // Loop through each entry
  foreach($art as $entry) {
@@ -45,6 +55,10 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
  <?php
 
  } // End the foreach loop 
+
+}else{
+	echo "Here is empty, yet:)";
+}
 
 }	
 	
