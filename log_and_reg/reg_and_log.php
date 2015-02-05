@@ -5,8 +5,8 @@ if(!isset($_SESSION)){session_start();}
 <?php
 if(isset($_SESSION['user'])){
 	?>
-	<p>Hello <?php echo $_SESSION["user"]; ?></p>
-	<a class="bott" href="log_and_reg/exit.php">Exit</a><br>
+	<a href="user.php"><p><?php echo $_SESSION["user"]; ?></p></a>
+		<a class="bott" href="log_and_reg/exit.php">Exit</a><br>
 <?php
 }else{
 ?>

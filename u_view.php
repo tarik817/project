@@ -26,7 +26,7 @@ session_start();
         </div>
         <div class="content b5radius">
             <?php
-            include_once "inc/content.inc.php";
+            include_once "inc/u_content.inc.php";
             ?>
             <div class="clr"></div>
         </div>

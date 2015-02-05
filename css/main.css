@@ -72,3 +72,8 @@ a{
 	background: #CCCCCC;
 	padding: 2px;
 }
+.footer{
+	height: 20px;
+	text-align: center;
+	background: #fff;
+}
