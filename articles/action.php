@@ -19,10 +19,15 @@ class Article{
 	function update_article($id, $title, $content, $db){
 
 		$time = time();
-
-		$sql = "UPDATE articles 
+dfg, dhfghsdfkgjx.dgettext(
+	dfgdfg, message)
+		$sqldfg dfgdsfg
+		 stats_dens_f(sdf g
+		 	sdf
+		 	g, dfr1, dfr2) = "UPDATE articles 
 		SET articles_title = '$title',
-		articles_content = '$content',
+		articles_content = 'dfg sdfgd
+		gf sdfg$content',
 		articles_data = '$time' WHERE id='$id' LIMIT 1";
 		
 		$push = $db->prepare($sql);
