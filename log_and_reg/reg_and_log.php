@@ -6,7 +6,7 @@ if(!isset($_SESSION)){session_start();}
 if(isset($_SESSION['user'])){
 	?>
 	<p>Hello <?php echo $_SESSION["user"]; ?></p>
-	<a href="log_and_reg/exit.php">Exit</a><br>
+	<a class="bott" href="log_and_reg/exit.php">Exit</a><br>
 <?php
 }else{
 ?>
@@ -17,5 +17,5 @@ if(isset($_SESSION['user'])){
 </form><?php
 }
 ?>
-<a href="log_and_reg/reg.php">Registration</a>
+<a class="bott" href="log_and_reg/reg.php">Registration</a>
 </div> 

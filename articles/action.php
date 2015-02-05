@@ -19,20 +19,18 @@ class Article{
 	function update_article($id, $title, $content, $db){
 
 		$time = time();
-dfg, dhfghsdfkgjx.dgettext(
-	dfgdfg, message)
-		$sqldfg dfgdsfg
-		 stats_dens_f(sdf g
-		 	sdf
-		 	g, dfr1, dfr2) = "UPDATE articles 
-		SET articles_title = '$title',
-		articles_content = 'dfg sdfgd
-		gf sdfg$content',
-		articles_data = '$time' WHERE id='$id' LIMIT 1";
-		
+		$sql = "UPDATE articles 
+		SET articles_title = ':title',
+		articles_content = ':content',
+		articles_data = ':time' WHERE id=':id' LIMIT 1";
+
 		$push = $db->prepare($sql);
-		$push->execute(array($title, $content, $time, $id));
- 		$push->closeCursor(); 
+		$push->bindParam(':title', $title);
+		$push->bindParam(':content', $content);
+		$push->bindParam(':time', $time);
+		$push->bindParam(':id', $id);
+		//$push->execute(array($title, $content, $time, $id));
+ 		//$push->closeCursor(); 
  		return true;
 
 	}

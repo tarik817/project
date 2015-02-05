@@ -9,25 +9,27 @@ session_start();
     <link href="css/main.css" rel="stylesheet" type = "text/css">
 </head>
 <body>
-    <div class="page_align">
-        <div class ="heder">
+    <div class="page_align b5radius">
+        <div class ="heder b5radius">
+            <div class ="hed_nav">
+            </div>
             <?php
             include_once "inc/heder.inc.php";
             include_once "log_and_reg/reg_and_log.php";
             ?>
 
         </div>
-        <div class="sidebar">
+        <div class="sidebar b5radius">
             <?php
             include_once "inc/sidebar.inc.php";
             ?>
         </div>
-        <div class="content">
+        <div class="content b5radius">
             <?php
             include_once "inc/content.inc.php";
             ?>
         </div>
-        <div class ="footer">
+        <div class ="footer b5radius">
             <?php
             include_once "inc/footer.inc.php";
             ?>

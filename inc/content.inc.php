@@ -19,8 +19,8 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
 
 			if(isset($_SESSION['user'])){
 				if ($_SESSION['user'] == $res['articles_author']){ ?>
-					<a href="add.php?show=<?php echo $res['articles_id']; ?>">Edit</a>
-					<a href="articles/del.php?id=<?php echo $res['articles_id']; ?> ">Delete</a>
+					<a class="bott" href="add.php?show=<?php echo $res['articles_id']; ?>">Edit</a>
+					<a class="bott" href="articles/del.php?id=<?php echo $res['articles_id']; ?> ">Delete</a>
 			<?php 
 				}
 			} 
@@ -42,16 +42,16 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
  foreach($art as $entry) {
 
 ?>
- 
+ <div class = "articles">
  <p>
  		<div><p><?php echo $entry['title'] ?></p></div>
 		<div><p><?php echo $entry['content'].'...'; ?></p></div>
 		<div><p>Author: <?php echo $entry['author'] ?></p></div>
 		<div><p>Date of adding: <?php echo date('F j, Y, g:i a',$entry['data']) ?></p></div>
-		<p><a href="?id=<?php echo $entry['id'] ?>">Read More</a></p>
-		<div>
- </p><br>
- 
+		<p><a class="bott" href="?id=<?php echo $entry['id'] ?>">Read More</a></p>
+		
+		 </p><br>
+ </div>
  <?php
 
  } // End the foreach loop 
