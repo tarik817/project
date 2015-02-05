@@ -4,18 +4,27 @@
 	outline:none;
 }
 body{
-background: #FFFFFF;
-    font:14px Arial, Tahoma, sans-serif; 
+	background: #FFFFFC;
+  font:14px Arial, Tahoma, sans-serif; 
 }
+
 a{
 	text-decoration:none;
 }
+.b5radius{
+  border-radius: 4px;
+  -webkit-border-radius: 5px;
+  -o-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -khtml-border-radius: 5px;
+}
 .page_align{
-	width: 1000px;
+	width: 1100px;
 	margin:0px auto;
-    overflow: hidden;
-    background: gray;
-    overflow: hidden;
+  overflow: hidden;
+  background: gray;
+  overflow: hidden;
 }
 .clr{
     clear:both;
@@ -24,7 +33,13 @@ a{
 	padding: 10px;
 	border: solid 1px gray;
 	height: 150px;
-	background: #99CCCC;
+	background: #999999;
+	border-bottom: solid 3px #CCCCCC;
+}
+.hed_nav{
+	margin: 3px;
+	height: 30px;
+	border-bottom: solid 1px gray;
 }
 .sidebar{
 	padding: 10px;
@@ -34,12 +49,26 @@ a{
 	float: left;
 	border: solid 1px gray;
 	background: #6699FF;
+	border-right: solid 4px #666699;
 }
 .content{
+	float: right;
 	padding: 10px;
-	width: 1000px;
+	width: 853px;
 	height: 1000px;
 	border: solid 1px gray;
 	background: #CCCCFF;
 	margin: right;
+}
+.articles{
+	border: solid 1px gray;
+	margin: 5px;
+	padding: 10px;
+}
+.bott{
+	border-spacing: 5px;
+	border: solid 1px gray;
+	margin: 10px;
+	background: #CCCCCC;
+	padding: 2px;
 }
