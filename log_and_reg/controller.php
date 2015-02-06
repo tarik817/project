@@ -132,7 +132,7 @@ if (isset($_POST['go_log'])){
 			
 		}
 		//Blocked user. 
-		elseif ($log['u_position'] == '4'){
+		elseif ($log['u_position'] == '5'){
 
 			exit("Your page is blocked by administrator.");
 		

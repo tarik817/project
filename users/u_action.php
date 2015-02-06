@@ -1,5 +1,4 @@
 <?php
-
 class User{	
 	function get_user ($name, $db){
 

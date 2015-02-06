@@ -64,9 +64,13 @@ class Article{
  			$content = $row['articles_content'];
  			
  			//Cutting string order by 150 chars.
- 			$content= mb_substr($content, 0, 154);
-			$position = mb_strrpos($content, ' ', 'UTF-8');
-			$content= mb_substr($content, 0, $position);
+ 			if(mb_strlen($content)>150){
+
+ 				$content= mb_substr($content, 0, 154);
+				$position = mb_strrpos($content, ' ', 'UTF-8');
+				$content= mb_substr($content, 0, $position);
+
+			}
 
  			//Pushing cutted data in array.
  			$articles[] = array(

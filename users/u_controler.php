@@ -1,5 +1,6 @@
 <?php
 if (isset($_POST['u_user'])){
+ 
  $name = $_POST['users_name'];
  $fir_name = $_POST['u_fir_name'];
  $sec_name = $_POST['u_sec_name'];

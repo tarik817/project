@@ -1,11 +1,14 @@
 <?php
+
 //Display user.
  if(isset($_GET['me']) and isset($_SESSION['user'])){
  	include_once "users/u_controler.php";
 
+ 	
 	$user = $_SESSION['user'];
 	$obj = new GetUser();
 	$res = $obj->expres_u($user);
+	$position = check_acses($user);
 
 	if(!empty($res['u_img'])){
 		$img = $res['u_img'];
@@ -17,7 +20,7 @@
 	?>
 <div>
 	<p>Nik-name<br><?php echo $res['users_name']; ?></p><br>
-	<p>Position<br><?php echo "Додати"; ?></p><br>
+	<p>Position<br><?php echo $position; ?></p><br>
 	<p>First name<br><?php echo $res['u_fir_name']; ?></p><br>
 	<p>Second name<br><?php echo $res['u_sec_name']; ?></p><br>
 	<p>E-mail<br><?php echo $res['users_email']; ?></p><br>
@@ -46,7 +49,7 @@
  			<div><p>Position<br><?php echo "Додати"; ?></p><br></div>
  			<div><p>Дата реєстрації:<br> <?php echo date('F j, Y, g:i a',$entry['users_data']) ?></p></div>
 			<div><p>Last Log in:<br> <?php echo date('F j, Y, g:i a',$entry['u_log']) ?></p></div>
-			<p><a class="bott" href="?id=<?php echo $entry['users_id'] ?>">View user information</a></p>
+			<p><a class="bott" href="?id=<?php echo $entry['users_name'] ?>">View user information</a></p>
 		
 		 	</p><br>
  	</div>
@@ -137,9 +140,55 @@ elseif(isset($_SESSION['user']) && isset($_GET['ed'])){
 }
 
 
-//else{
+else{
 
-//	header( "Location: index.php");
-//}
+	header( "Location: index.php");
+}
+
+
+function check_acses($name){
+	include_once "inc/db.inc.php";
+		
+		try {
+
+			$db = new PDO ("$db_info", "$db_user", "$db_pass"); 
+		
+		} catch (PDOException $e) {
+		
+			print "Error!: " . $e->getMessage() . "<br/>";
+    	die();
+		
+		}
+
+		$sql = "SELECT u_position FROM users WHERE users_name = '".$name."'";
+		$res=$db->query($sql);
+		$res->execute();
+		$r=$res->fetch();
+		print_r($r);
+		exit();
+		
+		switch ($r) {
+    case '0':
+    case '1':
+        return 'User';
+        break;
+    case '2':
+        return 'Editor';
+        break;
+    case '3':
+        return 'Administrator';
+        break;
+    case '4':
+        return 'Anonim';
+      	break;
+    case '5':
+        return 'Blocked';
+      	break;
+    default:
+    		exit();
+		}
+
+
+}
 
 ?>
