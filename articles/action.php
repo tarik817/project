@@ -15,18 +15,31 @@ class Article{
  		return true;
 	
 	}
-
 	function update_article($id, $title, $content, $db){
 
 		$time = time();
-		$sql = "UPDATE articles 
-		SET articles_title = '$title',
-		articles_content = '$content',
-		articles_data = '$time' WHERE id='$id' LIMIT 1";
-		$push->execute(array($title, $content, $time, $id));
- 		$push->closeCursor(); 
- 		return true;
 
+		$sql = "UPDATE articles 
+		SET articles_title = '221',
+		articles_content = '1',
+		articles_data = '1' 
+		WHERE id = '1'";
+		/*
+		$push = $db->	prepare($sql);
+		$push->bindValue(":title", $title);
+		$push->bindValue(":content", $content);
+		$push->bindValue(":time", $title);
+		$push->bindValue(":id", $id);
+		*/
+		$push = $db->	prepare($sql);
+		$res = $push->execute();
+ 		var_dump($res);
+ 		exit();
+ 		if($res == true){
+ 			return true;
+ 		}else{
+ 			return false;
+ 		}
 	}
 
 	function current_article ($id, $db){

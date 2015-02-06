@@ -30,15 +30,12 @@ if(isset($_POST['add_article']) && isset($_POST['update']) && is_numeric($_POST[
 	$res = $obj->update_article($id, $title, $content, $db);
 
 	if ($res == true) {
-
-		$id_obj = $db->query("SELECT LAST_INSERT_ID()");
- 		$id = $id_obj->fetch();
- 		$id_obj->closeCursor(); 
+  
 		header("Location: ../");
-		exit(); 
+		
 
 	} else {
-		exit("err");
+		exit("aa");
 	}
 
 } 

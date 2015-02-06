@@ -11,7 +11,7 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
 	<div>
 		<div><p><?php echo $res["articles_title"]; ?></p></div>
 		<div><p><?php echo $res["articles_content"]; ?></p></div>
-		<div><p>Author: <?php echo $res["articles_author"]; ?></p></div>
+		<div><p>Author:<a href="user.php?id=<?php echo $res['articles_author'] ?>"> <?php echo $res['articles_author'] ?></a></p></div>
 		<div><p>Date of adding: <?php echo date("F j, Y, g:i a",$res["articles_data"]); ?></p></div>
 		<div>
 
@@ -46,7 +46,7 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
  <p>
  		<div><p><?php echo $entry['title'] ?></p></div>
 		<div><p><?php echo $entry['content'].'...'; ?></p></div>
-		<div><p>Author: <?php echo $entry['author'] ?></p></div>
+		<div><p>Author:<a href="user.php?id=<?php echo $entry['author'] ?>"> <?php echo $entry['author'] ?></a></p></div>
 		<div><p>Date of adding: <?php echo date('F j, Y, g:i a',$entry['data']) ?></p></div>
 		<p><a class="bott" href="?id=<?php echo $entry['id'] ?>">Read More</a></p>
 		

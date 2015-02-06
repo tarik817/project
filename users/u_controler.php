@@ -73,8 +73,29 @@ class GetUser{
 		
 		$obj = new User();
 		$res = $obj->get_user($name, $db);
+
 		return $res;
 
+	}
+	function expres_users(){
+		include_once "u_action.php";
+		include_once "inc/db.inc.php";
+		
+		//Connect to DB.
+		try {
+
+			$db = new PDO ("$db_info", "$db_user", "$db_pass"); 
+		
+		} catch (PDOException $e) {
+
+			print "Error!: " . $e->getMessage() . "<br/>";
+    		die();
+		
+		}
+		$obj = NULL;
+		$obj = new User();
+		$users = $obj->fetch_users($db);
+		return $users;
 	}
 }
 

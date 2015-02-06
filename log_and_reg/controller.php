@@ -1,3 +1,4 @@
+
 <?php
 if (!isset($_SESSION)){
 
@@ -20,7 +21,7 @@ if (isset($_POST["go_reg"])){
 	
 	}
 	
-	if (strlen($name)<3 or strlen($name) > 15)
+	if (mb_strlen($name)<3 or mb_strlen($name) > 15)
 	
 	{
 	
@@ -98,11 +99,47 @@ if (isset($_POST['go_log'])){
 		
 		$r = new Auth();
 		$log = $r->log_in($name, $pass, $db);
-		if ($log == true){
+
+		//Log in user position.
+		if ($log['u_position'] == '1'){
 			$_SESSION['user'] = $name;
 			header("Location: ../index.php");
-		} else {
+
+		}
+		//Log in editor position.
+		 elseif ($log['u_position'] == '2') {
+
+			$_SESSION['user'] = $name;
+			$_SESSION['e_user'] = $name;
+			header("Location: ../index.php");
+		
+		} 
+		//Log in admin position.
+		elseif ($log['u_position'] == '3') {
+
+			$_SESSION['user'] = $name;
+			$_SESSION['e_user'] = $name;
+			$_SESSION['admin'] = $name;
+			header("Location: ../index.php");
+
+		} 
+		//Log in anonim user position.
+		elseif ($log['u_position'] == '4') {
+
+			$_SESSION['user'] = $name;
+			$_SESSION['anonim'] = $name;
+			header("Location: ../index.php");
+			
+		}
+		//Blocked user. 
+		elseif ($log['u_position'] == '4'){
+
+			exit("Your page is blocked by administrator.");
+		
+		}else {
+
 			exit("You entered an incorrect username or password.");
+		
 		}
 
 	}
