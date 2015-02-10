@@ -1,13 +1,21 @@
 <?php
-if(isset($_GET['id'])&& is_numeric($_GET['id']) && isset($_SESSION['e_user'])){
-
-	$id = $_GET['id'];
-	$d = del($id);
-	header( "Location: .." );
-
+if(!isset($_SESSION)){
+	session_start();
 }
 
-function del($id){
+if(isset($_GET['del']) && isset($_SESSION['admin'])){
+
+	
+	$name = $_GET['del'];
+	$d = del($name);
+	
+	header( "Location: .." );
+
+}else{
+	header("Location: ../");
+}
+
+function del($name){
 	include_once "../inc/db.inc.php";
 
 	//Connect to DB.
@@ -21,7 +29,7 @@ function del($id){
     		die();
 		}
 
-	$sql = "DELETE FROM articles WHERE articles_id = $id LIMIT 1";
+	$sql = "DELETE FROM users WHERE users_id = '$name' LIMIT 1";
 	
 	$del = $db->prepare($sql);
 	$del->execute();
