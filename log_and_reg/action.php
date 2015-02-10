@@ -27,7 +27,7 @@ class Auth{
 	function push_reg($name, $email, $pass, $db){
 		$data = time();
 		$position = '1';
-		$sql = "INSERT INTO users (users_name, users_email, users_pass, users_data, u_position) VALUES ('$name', '$email', '$pass', '$data', '$position') ";
+		$sql = "INSERT INTO users (users_name, users_email, users_pass, users_data, u_position, u_log) VALUES ('$name', '$email', '$pass', '$data', '$position', $data) ";
 		$push = $db->prepare($sql);
 		$push->execute(array($name, $email, $pass, $data, $position));
  		$push->closeCursor(); 
@@ -44,6 +44,17 @@ class Auth{
 		}
 		$chek->closeCursor();
 	
+	}
+	function last_log($name, $db){
+		$u_log = time();
+
+		$sql = "UPDATE users SET u_log ='$u_log' WHERE users_name= '$name'";
+
+		$push = $db->prepare($sql);
+		$res = $push->execute(array($u_log, $name));
+ 		$push->closeCursor();
+ 		
+
 	}
 
 }

@@ -4,11 +4,10 @@
  if(isset($_GET['me']) and isset($_SESSION['user'])){
  	include_once "users/u_controler.php";
 
- 	
 	$user = $_SESSION['user'];
 	$obj = new GetUser();
 	$res = $obj->expres_u($user);
-	$position = check_acses($user);
+	$position = $obj->check_acses($user);
 
 	if(!empty($res['u_img'])){
 		$img = $res['u_img'];
@@ -25,7 +24,7 @@
 	<p>Second name<br><?php echo $res['u_sec_name']; ?></p><br>
 	<p>E-mail<br><?php echo $res['users_email']; ?></p><br>
 	<p>Avatar<br><img src="<?php echo "$src"?>" /><br><?php echo $img; ?><br></p>
-	<a href="user.php?ed=1">Edite proffile</a>
+	<a href="user.php?ed=admin">Edite proffile</a>
 
 </div>
 
@@ -146,49 +145,5 @@ else{
 }
 
 
-function check_acses($name){
-	include_once "inc/db.inc.php";
-		
-		try {
-
-			$db = new PDO ("$db_info", "$db_user", "$db_pass"); 
-		
-		} catch (PDOException $e) {
-		
-			print "Error!: " . $e->getMessage() . "<br/>";
-    	die();
-		
-		}
-
-		$sql = "SELECT u_position FROM users WHERE users_name = '".$name."'";
-		$res=$db->query($sql);
-		$res->execute();
-		$r=$res->fetch();
-		print_r($r);
-		exit();
-		
-		switch ($r) {
-    case '0':
-    case '1':
-        return 'User';
-        break;
-    case '2':
-        return 'Editor';
-        break;
-    case '3':
-        return 'Administrator';
-        break;
-    case '4':
-        return 'Anonim';
-      	break;
-    case '5':
-        return 'Blocked';
-      	break;
-    default:
-    		exit();
-		}
-
-
-}
 
 ?>

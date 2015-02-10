@@ -7,7 +7,7 @@ if(!isset($_SESSION)){
 <?php
 if(isset($_SESSION['user'])){
 	?>
-	<a href="user.php?me=1"><p><?php echo $_SESSION["user"]; ?></p></a>
+	<a href="user.php?me=<?php echo $_SESSION['user']; ?>"><p><?php echo $_SESSION['user']; ?></p></a>
 		<a class="bott" href="log_and_reg/exit.php">Exit</a><br>
 <?php
 }else{

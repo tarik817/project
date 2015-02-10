@@ -86,6 +86,16 @@ if (isset($_POST['go_log'])){
 
 	
 	if (!empty($_POST['log_name']) && !empty($_POST['log_pass'])) {
+		try {
+
+			$db = new PDO ("$db_info", "$db_user", "$db_pass"); 
+		
+		} catch (PDOException $e) {
+		
+			print "Error!: " . $e->getMessage() . "<br/>";
+    	die();
+		
+		}
 
 		$name= $_POST['log_name'];
 		$pass=$_POST['log_pass'];
@@ -103,6 +113,7 @@ if (isset($_POST['go_log'])){
 		//Log in user position.
 		if ($log['u_position'] == '1'){
 			$_SESSION['user'] = $name;
+			$r->last_log($name, $db);
 			header("Location: ../index.php");
 
 		}
@@ -111,6 +122,7 @@ if (isset($_POST['go_log'])){
 
 			$_SESSION['user'] = $name;
 			$_SESSION['e_user'] = $name;
+			$r->last_log($name, $db);
 			header("Location: ../index.php");
 		
 		} 
@@ -120,6 +132,7 @@ if (isset($_POST['go_log'])){
 			$_SESSION['user'] = $name;
 			$_SESSION['e_user'] = $name;
 			$_SESSION['admin'] = $name;
+			$r->last_log($name, $db);
 			header("Location: ../index.php");
 
 		} 
@@ -128,11 +141,13 @@ if (isset($_POST['go_log'])){
 
 			$_SESSION['user'] = $name;
 			$_SESSION['anonim'] = $name;
+			$r->last_log($name, $db);
 			header("Location: ../index.php");
 			
 		}
 		//Blocked user. 
 		elseif ($log['u_position'] == '5'){
+			$r->last_log($name, $db);
 
 			exit("Your page is blocked by administrator.");
 		

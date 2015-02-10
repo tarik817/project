@@ -12,6 +12,23 @@ class User{
 	}
 	
 	function push(){
+		$time = time();
+
+		$sql = "UPDATE users 
+		SET users_name = '$title',
+		articles_content = '$content',
+		articles_data = '$time' 
+		WHERE articles_id = '$id'";
+
+		$push = $db->prepare($sql);
+		$res = $push->execute(array($title, $content, $time));
+ 		$push->closeCursor();
+ 	
+ 		if($res == true){
+ 			return true;
+ 		}else{
+ 			return false;
+ 		}
 
 	}
 	function fetch_users($db){
@@ -37,6 +54,35 @@ class User{
 
  		} 
  		return $users;
+
+	}
+	function acses($name, $db){
+		$sql = "SELECT u_position FROM users WHERE users_name = '".$name."'";
+		$res=$db->query($sql);
+		$res->execute();
+		$r=$res->fetch();
+		$r = $r['u_position'];
+
+		switch ("$r") {
+    case '0':
+    case '1':
+        return 'User';
+        break;
+    case '2':
+        return 'Editor';
+        break;
+    case '3':
+        return 'Administrator';
+        break;
+    case '4':
+        return 'Anonim';
+      	break;
+    case '5':
+        return 'Blocked';
+      	break;
+    default:
+    		exit("a");
+		}
 
 	}
 

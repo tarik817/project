@@ -20,21 +20,15 @@ class Article{
 		$time = time();
 
 		$sql = "UPDATE articles 
-		SET articles_title = '221',
-		articles_content = '1',
-		articles_data = '1' 
-		WHERE id = '1'";
-		/*
-		$push = $db->	prepare($sql);
-		$push->bindValue(":title", $title);
-		$push->bindValue(":content", $content);
-		$push->bindValue(":time", $title);
-		$push->bindValue(":id", $id);
-		*/
-		$push = $db->	prepare($sql);
-		$res = $push->execute();
- 		var_dump($res);
- 		exit();
+		SET articles_title = '$title',
+		articles_content = '$content',
+		articles_data = '$time' 
+		WHERE articles_id = '$id'";
+
+		$push = $db->prepare($sql);
+		$res = $push->execute(array($title, $content, $time));
+ 		$push->closeCursor();
+ 	
  		if($res == true){
  			return true;
  		}else{

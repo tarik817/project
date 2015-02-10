@@ -33,6 +33,8 @@ if (isset($_POST['u_user'])){
 }
 
 class GetUser{
+	
+
 	function update_user($name, $fir_name, $sec_name, $email, $pass, $u_img){
 
 		include_once "log_and_red/action.php";
@@ -58,9 +60,9 @@ class GetUser{
 		}
 	}
 	function expres_u($name){
-
-		include_once "users/u_action.php";
 		include_once "inc/db.inc.php";
+		include_once "users/u_action.php";
+		
 		try {
 
 			$db = new PDO ("$db_info", "$db_user", "$db_pass"); 
@@ -79,6 +81,7 @@ class GetUser{
 
 	}
 	function expres_users(){
+
 		include_once "u_action.php";
 		include_once "inc/db.inc.php";
 		
@@ -97,6 +100,30 @@ class GetUser{
 		$obj = new User();
 		$users = $obj->fetch_users($db);
 		return $users;
+	}
+	
+	function check_acses($name){
+		include "inc/db.inc.php";
+
+		try {
+		
+
+
+			$db = new PDO ("$db_info", "$db_user", "$db_pass"); 
+
+			$obj = new User();
+			$res = $obj->acses($name, $db);
+
+			return $res;
+					
+		} catch (PDOException $e) {
+		
+			print "Error!: " . $e->getMessage() . "<br/>";
+    	die();
+		
+		}
+
+
 	}
 }
 
