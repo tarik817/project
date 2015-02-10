@@ -10,6 +10,35 @@ class User{
 		return $r;
 
 	}
+	function update($name, $fir_name, $sec_name, $email, $pass, $u_img, $u_position, $db){
+		$time = time();
+		$pass = md5($pass);
+
+		$sql = "UPDATE users 
+		SET 
+		users_email = '$email',
+		users_pass = '$pass',
+		users_data = $time,
+		u_fir_name = '$fir_name',
+		u_sec_name = '$sec_name',
+		u_position = $u_position,
+		u_img = '$u_img',
+		u_log = '$time'
+
+		WHERE users_name = '$name'";
+
+		$push = $db->prepare($sql);
+		$res = $push->execute(array($name, $fir_name, $sec_name, $email, $pass, $u_img, $u_position));
+ 		$push->closeCursor();
+ 	
+ 		if($res == true){
+ 			return true;
+ 		}else{
+ 			return false;
+ 		}
+
+
+	}
 	
 	function push(){
 		$time = time();

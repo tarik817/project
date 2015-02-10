@@ -7,7 +7,10 @@ if (isset($_POST['u_user'])){
  $email = $_POST['u_email'];
  $pass = $_POST['u_pass'];
  $r_pass = $_POST['u_r_pas'];
+ if(isset($_POST['u_img'])){
  $u_img = $_POST['u_img'];
+ }
+ $u_position = $_POST['u_position'];
 
 
 	if ($pass != $r_pass) {
@@ -26,7 +29,7 @@ if (isset($_POST['u_user'])){
 		
 
 		$obj = new GetUser();
-		$res = $obj->update_user($name, $fir_name, $sec_name, $email, $pass, $u_img);
+		$res = $obj->update_user($name, $fir_name, $sec_name, $email, $pass, $u_img = 0 , $u_position);
 
 	}
 
@@ -35,32 +38,31 @@ if (isset($_POST['u_user'])){
 class GetUser{
 	
 
-	function update_user($name, $fir_name, $sec_name, $email, $pass, $u_img){
+	function update_user($name, $fir_name, $sec_name, $email, $pass, $u_img, $u_position){
+		include_once "../inc/db.inc.php";
 
-		include_once "log_and_red/action.php";
-		$obj = new Auth();
-		$res = $obj->check_data($name, $email, $db);
+		try {
 
-		if ($res == "u") {
-
-			$r = null;
-			exit ("Sorry this name is already reserved.");
-
-		} elseif ($res == "e") {
-
-			$r = null;
-			exit ("Sorry this e-mail is already reserved.");
-
-		} else {
-
-		include_once "users/u_action.php";
-		$obj = new User();
-		$res = $obj->push();
-
+		$db = new PDO ("$db_info", "$db_user", "$db_pass"); 
+		
+		} catch (PDOException $e) {
+		
+		print "Error!: " . $e->getMessage() . "<br/>";
+    die();
+		
 		}
+
+		include_once "../users/u_action.php";
+		$obj = new User();
+		$res = $obj->update($name, $fir_name, $sec_name, $email, $pass, $u_img, $u_position, $db);
+		if($res){
+			header("Location: ../user.php?id=$name");
+		}
+
+		
 	}
 	function expres_u($name){
-		include_once "inc/db.inc.php";
+		include "inc/db.inc.php";
 		include_once "users/u_action.php";
 		
 		try {
@@ -83,7 +85,7 @@ class GetUser{
 	function expres_users(){
 
 		include_once "u_action.php";
-		include_once "inc/db.inc.php";
+		include "inc/db.inc.php";
 		
 		//Connect to DB.
 		try {
@@ -104,11 +106,10 @@ class GetUser{
 	
 	function check_acses($name){
 		include "inc/db.inc.php";
+		include_once "users/u_action.php";
 
 		try {
 		
-
-
 			$db = new PDO ("$db_info", "$db_user", "$db_pass"); 
 
 			$obj = new User();
