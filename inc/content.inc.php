@@ -11,8 +11,19 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
 ?>	
 
 	<div>
-		<div><p><?php echo $res["articles_title"]; ?></p></div>
-		<div><p><?php echo $res["articles_content"]; ?></p></div>
+		<?php 
+ 		if(!isset($_SESSION['lang'])){
+ 		?>
+ 		<div><p><?php echo $res['articles_title'] ?></p></div>
+		<div><p><?php echo $res['articles_content'].'...'; ?></p></div>
+		<?php
+		}elseif (isset($_SESSION['lang']) and $_SESSION['lang'] == 'ua') {
+		?>
+		<div><p><?php echo (empty($res['articles_title_ua'])) ? $res['articles_title'] : $res['articles_title_ua']; ?></p></div>
+		<div><p><?php echo (empty($res['articles_content_ua'])) ? $res['articles_content'].'...' : $res['articles_content_ua'].'...'; ?></p></div>
+		<?php 
+		}
+		?>
 		<div><p><?php t("Author:"); ?><a href="user.php?id=<?php echo $res['articles_author'] ?>"> <?php echo $res['articles_author'] ?></a></p></div>
 		<div><p><?php t("Date of adding:"); ?> <?php echo date("F j, Y, g:i a",$res["articles_data"]); ?></p></div>
 		<div>
@@ -43,24 +54,30 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
 	$art = $obj->expres_all();
 	if (!empty($art)){
 
-// Loop through each entry
- foreach($art as $entry) {
+// Loop through each resulte.
+ foreach($art as $res) {
 
 ?>
  <div class = "articles">
  <p>
- 		<div><p><?php echo $entry['title'] ?></p></div>
-		<div><p><?php echo $entry['content'].'...'; ?></p></div>
-		<div><p><?php t("Author:"); ?><a href="user.php?id=<?php echo $entry['author'] ?>"> <?php echo $entry['author'] ?></a></p></div>
-		<div><p><?php t("Date of adding:"); ?> <?php echo date('F j, Y, g:i a',$entry['data']) ?></p></div>
-		<p><a class="bott" href="?id=<?php echo $entry['id'] ?>"><?php t("Read More"); ?></a>
-		<?php
-			if(isset($_SESSION['e_user']) and $_SESSION['e_user'] == $entry['author'] || isset($_SESSION['admin'])){
-		?>
-				<a class="bott" href="lang.php?translate" ><?php t("Edit translation"); ?></a>
-		<?php		
-			}
-		?>
+ 	<?php 
+ 	if(!isset($_SESSION['lang'])){
+ 	?>
+ 		<div><p><?php echo $res['articles_title'] ?></p></div>
+		<div><p><?php echo $res['articles_content'].'...'; ?></p></div>
+	<?php
+	}elseif (isset($_SESSION['lang']) and $_SESSION['lang'] == 'ua') {
+	?>
+		<div><p><?php echo (empty($res['articles_title_ua'])) ? $res['articles_title'] : $res['articles_title_ua']; ?></p></div>
+		<div><p><?php echo (empty($res['articles_content_ua'])) ? $res['articles_content'].'...' : $res['articles_content_ua'].'...'; ?></p></div>
+	<?php 
+	}
+	?>
+
+		<div><p><?php t("Author:"); ?><a href="user.php?id=<?php echo $res['articles_author'] ?>"> <?php echo $res['articles_author'] ?></a></p></div>
+		<div><p><?php t("Date of adding:"); ?> <?php echo date('F j, Y, g:i a',$res['articles_data']) ?></p></div>
+		<p><a class="bott" href="?id=<?php echo $res['articles_id'] ?>"><?php t("Read More"); ?></a>
+	
 		
 		</p>
 		 </p><br>

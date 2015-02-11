@@ -18,6 +18,10 @@ if(isset($_SESSION['user'])){
 	<p><input type="submit" value="Login" name="go_log"> </p>
 </form><?php
 }
+if(!isset($_SESSION['user'])){
 ?>
 <a class="bott" href="log_and_reg/reg.php">Registration</a>
+<?php
+}
+?>
 </div> 

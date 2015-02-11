@@ -13,6 +13,8 @@ if(isset($_POST['add_article']) && isset($_POST['update']) && is_numeric($_POST[
 	$id = $_POST['update'];
 	$title = $_POST['title'];
 	$content = $_POST['content'];
+	$title_ua = $_POST['title_ua'];
+	$content_ua = $_POST['content_ua'];
 	
 	//Sanitizing data.
 	$title = htmlspecialchars ($title);
@@ -27,7 +29,7 @@ if(isset($_POST['add_article']) && isset($_POST['update']) && is_numeric($_POST[
 	}
 
 	$obj = new Article();
-	$res = $obj->update_article($id, $title, $content, $db);
+	$res = $obj->update_article($id, $title, $content, $title_ua, $content_ua, $db);
 
 	if ($res == true) {
   
@@ -47,6 +49,8 @@ elseif (isset($_POST['add_article'])) {
 
 	$title = $_POST['title'];
 	$content = $_POST['content'];
+	$title_ua = $_POST['title_ua'];
+	$content_ua = $_POST['content_ua'];
 	
 	//Sanitizing data.
 	$title = htmlspecialchars ($title);
@@ -61,7 +65,7 @@ elseif (isset($_POST['add_article'])) {
 	}
 
 	$obj = new Article();
-	$res = $obj->push_article($title, $content, $db);
+	$res = $obj->push_article($title, $content, $title_ua, $content_ua, $db);
 	
 	if ($res == true) {
 
@@ -80,7 +84,7 @@ class Control{
 	function expres($id){
 
 		include_once "action.php";
-		include_once "inc/db.inc.php";
+		include "inc/db.inc.php";
 		try {
 
 			$db = new PDO ("$db_info", "$db_user", "$db_pass"); 
