@@ -38,8 +38,7 @@ a{
 }
 .hed_nav{
 	margin: 3px;
-	height: 30px;
-	border-bottom: solid 1px gray;
+	height: 35px;
 }
 .sidebar{
 	padding: 10px;
@@ -72,6 +71,9 @@ a{
 	background: #CCCCCC;
 	padding: 2px;
 }
+.bott:hover{
+	background: #CBBBBB;
+}
 .footer{
 	height: 20px;
 	text-align: center;
@@ -80,4 +82,20 @@ a{
 .u_del{
 	margin-left: 750px;
 	margin-top: -80px;
+}
+.lang{
+	margin: -10px;
+	margin-bottom: 10px;
+	text-align: right;
+}
+.lang a{
+	padding: 3px;
+	float: right;
+	border-right: solid 1px gray;
+	outline: none;
+}
+.f_bord{
+	border: solid 1px gray;
+	padding: 5px;
+	margin: 10px;
 }

@@ -1,11 +1,12 @@
 <?php
 session_start();
-if (isset($_SESSION['user'])) {
+if (isset($_SESSION['e_user'])) {
+    include_once "translate/t.inc.php";
 ?>
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Test</title>
+    <title><?php t("Test"); ?></title>
     <meta charset="utf-8">
     <link href="css/main.css" rel="stylesheet" type = "text/css">
 </head>

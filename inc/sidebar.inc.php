@@ -1,10 +1,17 @@
-<a class="bott" href="index.php">Home</a><br>
-<a class="bott" href="user.php?display">Users</a><br>
+<?php
+include_once "translate/t.inc.php";
+?>
+<a class="bott" href="index.php"><?php t("Home"); ?></a><br>
+<a class="bott" href="user.php?display"><?php t("Users"); ?></a><br>
 <?php
 if(isset($_SESSION['e_user'])){
-echo '<a href="add.php" class="bott">Add news</a><br>';	
+?>
+<a href="add.php" class="bott"><?php t("Add news"); ?></a><br>	
+<?php
 }
 if(isset($_SESSION['admin'])){
-	echo '<a href="lang.php" class="bott">Add translation</a><br>';	
+	?>
+	<a href="lang.php" class="bott"><?php t("Add translation"); ?></a><br>	
+<?php
 }
-
+?>

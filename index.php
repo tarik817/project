@@ -1,18 +1,17 @@
 <?php
 session_start();
+include_once "translate/t.inc.php";
 ?>
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Test</title>
+    <title><?php t("Test"); ?></title>
     <meta charset="utf-8">
     <link href="css/main.css" rel="stylesheet" type = "text/css">
 </head>
 <body>
     <div class="page_align b5radius">
         <div class ="heder b5radius">
-            <div class ="hed_nav">
-            </div>
             <?php
             include_once "inc/heder.inc.php";
             include_once "log_and_reg/reg_and_log.php";

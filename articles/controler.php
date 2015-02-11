@@ -98,7 +98,7 @@ class Control{
 	function expres_all(){
 
 		include_once "action.php";
-		include_once "inc/db.inc.php";
+		include "inc/db.inc.php";
 		
 		//Connect to DB.
 		try {
