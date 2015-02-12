@@ -99,9 +99,9 @@ class Control{
 		return $res;
 	}
 
-	function expres_all(){
+	function expres_all($start , $on_page){
 
-		include_once "action.php";
+		include "action.php";
 		include "inc/db.inc.php";
 		
 		//Connect to DB.
@@ -117,9 +117,29 @@ class Control{
 		}
 		
 		$obj = new Article();
-		$articles = $obj->fetch_articles($db);
+		$articles = $obj->fetch_articles($start, $on_page, $db);
 		return $articles;
 
 	}
+	function count_a(){
+		include "inc/db.inc.php";
+		//Connect to DB.
+		try {
 
+			$db = new PDO ("$db_info", "$db_user", "$db_pass"); 
+		
+		} catch (PDOException $e) {
+
+			print "Error!: " . $e->getMessage() . "<br/>";
+    		die();
+		
+		}
+		$i=NULL;
+		$sql = "SELECT * FROM articles";
+		foreach($db->query($sql) as $row){
+			$i++;
+		}
+		return "$i";
+
+}
 }

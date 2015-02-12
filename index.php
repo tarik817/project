@@ -33,7 +33,6 @@ include_once "translate/t.inc.php";
             <?php
             include_once "inc/footer.inc.php";
             ?>
-            <div class="clr"></div>
         </div>
     
 

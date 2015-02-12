@@ -23,8 +23,9 @@ a{
 	width: 1100px;
 	margin:0px auto;
   overflow: hidden;
-  background: gray;
+  background: #6699FF;
   overflow: hidden;
+  clear:both;
 }
 .clr{
     clear:both;
@@ -43,21 +44,21 @@ a{
 .sidebar{
 	padding: 10px;
 	float: left;	
-	height: 1000px;
+	height: auto;
 	width: 200px;
 	float: left;
-	border: solid 1px gray;
 	background: #6699FF;
-	border-right: solid 4px #666699;
+	box-shadow: none;
 }
 .content{
 	float: right;
 	padding: 10px;
 	width: 853px;
-	height: 1000px;
+	height: auto;
 	border: solid 1px gray;
 	background: #CCCCFF;
 	margin: right;
+	border-left: solid 4px #666699;
 }
 .articles{
 	border: solid 1px gray;
@@ -77,7 +78,14 @@ a{
 .footer{
 	height: 20px;
 	text-align: center;
-	background: #fff;
+	background: #CCCCCC;
+	width: 100%;
+	clear:both;
+	position:relative;
+	bottom: 0px;
+}
+.footer:hover{
+	background: #CCCBBB;
 }
 .u_del{
 	margin-left: 750px;
@@ -98,4 +106,17 @@ a{
 	border: solid 1px gray;
 	padding: 5px;
 	margin: 10px;
+}
+.comment{
+	border-bottom: solid 1px gray;
+	padding: 20px;
+	margin-left: 25px;
+	margin-right: 25px;
+
+}
+.vote{
+	margin: 10px;
+	margin-left: 90px;
+	font-size: 12px;
+	color: #6B6B6B;
 }

@@ -49,11 +49,13 @@ class Article{
 
 	}
 
-	function fetch_articles($db){
+	function fetch_articles($start, $on_page, $db){
 
 		$articles = NULL;
+		print_r($db);
+		exit();
 
-		$sql = "SELECT * FROM articles";
+		$sql = "SELECT * FROM articles LIMIT '$start', '$on_page'";
 
 		// Loop through returned results and store as an array.
  		foreach($db->query($sql) as $row) {
@@ -86,6 +88,7 @@ class Article{
  				'articles_author' => $row['articles_author'],
  				'articles_data' => $row['articles_data']
  			);
+
 
  		} 
  		return $articles;
