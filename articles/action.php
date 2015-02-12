@@ -53,15 +53,14 @@ class Article{
 
 		$articles = NULL;
 		$sql = "SELECT * FROM articles ORDER BY articles_id DESC LIMIT '$start', '$on_page'";
-		// Loop through returned results and store as an array.
- 		do{
+		$sql = $db->prepare($sql);
+		$res = $sql -> execute($start, $on_page);
+		var_dump($res);
+		exit();
+ 			/*
  			$row = $db->prepare($sql);
- 			print_r($row);
-			exit();
  			$row->execute(array($start, $on_page));
-			$row=$row->fetch();
-			print_r($row);
-			exit();
+			$row = $row->fetch();
 
 			$content = $row['articles_content'];
  			$content_ua = $row['articles_content_ua'];
@@ -92,13 +91,12 @@ class Article{
  				'articles_author' => $row['articles_author'],
  				'articles_data' => $row['articles_data']
  			);
-
-			
- 		}while($row);
+*/		
+ 	
 
  		
- 		/*
- 		foreach($db->query($sql) as $row) {
+ 		
+ 		foreach($res as $row) {
  			$content = $row['articles_content'];
  			$content_ua = $row['articles_content_ua'];
  			
@@ -131,7 +129,7 @@ class Article{
 
 			
  		} 
- 		*/
+ 		
  		return $articles;
 
 	}
