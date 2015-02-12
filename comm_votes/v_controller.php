@@ -44,7 +44,7 @@ function fetch_comments($articles_id){
 		print "Error!: " . $e->getMessage() . "<br/>";
     	die();
 	}
-	$sql = "SELECT * FROM comments WHERE articles_id = '$articles_id'";
+	$sql = "SELECT * FROM comments WHERE articles_id = '$articles_id' ORDER BY c_id DESC";
 
 		// Loop through returned results and store as an array.
 	$comments = NULL;
@@ -98,11 +98,13 @@ if(isset($_POST['vote_a_d'])){
 	}
 }
 			
-function vote_preview($articles_id){
+function vote_preview($articles_id, $flag){
 	include "v_action.php";
 	$v = new Vote();
+	if($flag == true){
 	$try = $v->is_vote($articles_id);
 	$prev['try']=$try;
+	}
 	$rating = $v->vote_rating($articles_id);
 	$prev['rating'] = $rating;
 	return $prev;

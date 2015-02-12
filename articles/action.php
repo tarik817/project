@@ -52,22 +52,26 @@ class Article{
 	function fetch_articles($start, $on_page, $db){
 
 		$articles = NULL;
-		print_r($db);
-		exit();
-
-		$sql = "SELECT * FROM articles LIMIT '$start', '$on_page'";
-
+		$sql = "SELECT * FROM articles ORDER BY articles_id DESC LIMIT '$start', '$on_page'";
 		// Loop through returned results and store as an array.
- 		foreach($db->query($sql) as $row) {
- 			$content = $row['articles_content'];
+ 		do{
+ 			$row = $db->prepare($sql);
+ 			print_r($row);
+			exit();
+ 			$row->execute(array($start, $on_page));
+			$row=$row->fetch();
+			print_r($row);
+			exit();
+
+			$content = $row['articles_content'];
  			$content_ua = $row['articles_content_ua'];
  			
  			//Cutting string order by 150 chars.
  			if(mb_strlen($content)>150){
 
- 				$content= mb_substr($content, 0, 154);
+ 				$content = mb_substr($content, 0, 154);
 				$position = mb_strrpos($content, ' ', 'UTF-8');
-				$content= mb_substr($content, 0, $position);
+				$content = mb_substr($content, 0, $position);
 
 			}
 			if(mb_strlen($content_ua)>150){
@@ -89,8 +93,45 @@ class Article{
  				'articles_data' => $row['articles_data']
  			);
 
+			
+ 		}while($row);
 
+ 		
+ 		/*
+ 		foreach($db->query($sql) as $row) {
+ 			$content = $row['articles_content'];
+ 			$content_ua = $row['articles_content_ua'];
+ 			
+ 			//Cutting string order by 150 chars.
+ 			if(mb_strlen($content)>150){
+
+ 				$content = mb_substr($content, 0, 154);
+				$position = mb_strrpos($content, ' ', 'UTF-8');
+				$content = mb_substr($content, 0, $position);
+
+			}
+			if(mb_strlen($content_ua)>150){
+
+ 				$content_ua= mb_substr($content_ua, 0, 154);
+				$position = mb_strrpos($content_ua, ' ', 'UTF-8');
+				$content_ua= mb_substr($content_ua, 0, $position);
+
+			}
+
+ 			//Pushing cutted data in array.
+ 			$articles[] = array(
+ 				'articles_id' => $row['articles_id'],
+ 				'articles_title' => $row['articles_title'],
+ 				'articles_content' => $content,
+ 				'articles_title_ua' => $row['articles_title_ua'],
+ 				'articles_content_ua' =>$content_ua,
+ 				'articles_author' => $row['articles_author'],
+ 				'articles_data' => $row['articles_data']
+ 			);
+
+			
  		} 
+ 		*/
  		return $articles;
 
 	}
