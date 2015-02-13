@@ -122,7 +122,33 @@ if(isset($_SESSION['user'])){
 	<!--Outlet cooments-->
 	<?php 
 }
-	$resulte = comm_get($res['articles_id']);
+//Commrnt pager.
+	$at_once = 10;
+	include "inc/db.inc.php";
+	//Connect to DB.
+	try {
+		$db = new PDO ("$db_info", "$db_user", "$db_pass"); 
+	} catch (PDOException $e) {
+		print "Error!: " . $e->getMessage() . "<br/>";
+   		die();
+	}
+	$sql = "SELECT * FROM comments";
+		$i = NULL;
+		foreach($db->query($sql) as $full){
+			$i++;
+		}
+	$count_c = $i;
+	$pages = ceil($count_c / $at_once);
+	$curr_c_page = isset($_GET['comment']) ? $_GET['comment'] : 1;
+	if($curr_c_page < 1){
+		$curr_c_page = 1;
+	}
+	if($curr_c_page > $pages){
+		$curr_c_page = $pages;
+	}
+	$start = ($curr_c_page -1) * $at_once;
+	$resulte = comm_get($res['articles_id'] ,$at_once, $start);
+
 	if(!empty($resulte)){
 	// Loop through each resulte which displaying comments.
  		foreach($resulte as $res) {
@@ -144,6 +170,18 @@ if(isset($_SESSION['user'])){
 
 	<?php
 		}//End of comments foreach loop.
+	
+//Comments pager footer.
+	echo '<div class="pager">';
+ 		for($page = 1; $page <= $pages; $page++){
+ 			if($page == $curr_c_page){
+ 				echo '<strong>'.$page.'</strong> &nbsp'; 
+ 			}else{
+ 				echo '<a href="?id='.$_GET["id"].'&comment='.$page.'">'.$page.'</a> &nbsp';
+
+ 			}
+ 		}
+ 	echo '</div>';
 	}else{
 		echo t("No commets yet.");
 	}
@@ -156,9 +194,16 @@ if(isset($_SESSION['user'])){
 	
 	//Pager.
 	$count = $obj->count_a();
-	$on_page = '10';
+	$on_page = 10;
 	$pages = ceil($count / $on_page);
-	$start = ($pages - 1) * $on_page;
+	$curr_page = isset($_GET['page']) ? $_GET['page'] : 1;
+	if($curr_page < 1){
+		$curr_page = 1;
+	}
+	if($curr_page > $pages){
+		$curr_page = $pages;
+	}
+	$start = ($curr_page - 1) * $on_page;
 	$art = $obj->expres_all($start, $on_page);
 	if (!empty($art)){
 
@@ -173,12 +218,12 @@ if(isset($_SESSION['user'])){
  	if(!isset($_SESSION['lang'])){
  	?>
  		<div><p><?php echo $res['articles_title'] ?></p></div>
-		<div><p><?php echo $res['articles_content'].'...'; ?></p></div>
+		<div><p><?php echo $res['articles_content']; ?></p></div>
 	<?php
 	}elseif (isset($_SESSION['lang']) and $_SESSION['lang'] == 'ua') {
 	?>
 		<div><p><?php echo (empty($res['articles_title_ua'])) ? $res['articles_title'] : $res['articles_title_ua']; ?></p></div>
-		<div><p><?php echo (empty($res['articles_content_ua'])) ? $res['articles_content'].'...' : $res['articles_content_ua'].'...'; ?></p></div>
+		<div><p><?php echo (empty($res['articles_content_ua'])) ? $res['articles_content'] : $res['articles_content_ua'].'...'; ?></p></div>
 	<?php 
 	}
 	?>
@@ -192,22 +237,26 @@ if(isset($_SESSION['user'])){
 		 </p><br>
  </div>
  <?php
-
  } // End the foreach loop. 
- ?>
- <div class="pager">
- </div>
-
- <?php 
-
+ //Pager navigation.
+ echo '<div class="pager">';
+ for($page = 1; $page <= $pages; $page++){
+ 	if($page == $curr_page){
+ 		echo '<strong>'.$page.'</strong> &nbsp'; 
+ 	}else{
+ 		echo '<a href="?page='.$page.'">'.$page.'</a> &nbsp';
+ 	}
+ }
+ echo '</div>';
+ 
 }else{
 	echo "Here is empty, yet:)";
 }
 
 }	
-function comm_get($articles_id){
+function comm_get($articles_id, $at_once, $start){
 	include_once "comm_votes/v_controller.php";
-	$res = fetch_comments($articles_id);
+	$res = fetch_comments($articles_id, $at_once, $start);
 	return $res;
 }	
 ?>

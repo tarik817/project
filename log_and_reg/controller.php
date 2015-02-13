@@ -18,6 +18,10 @@ if (isset($_POST["go_reg"])){
 	if ($pass != $r_pass) {
 	
 		exit("Your passwords don't match.");
+	}
+	if (mb_strlen($name)<3 or mb_strlen($name) > 15)
+	{
+		exit ("Name must be more than 3 characters and less than 15.");
 	
 	}
 	

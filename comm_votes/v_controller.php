@@ -35,7 +35,7 @@ function push_comment($topic, $comment, $articles_id, $author){
  		return false;
  	}
 }
-function fetch_comments($articles_id){
+function fetch_comments($articles_id, $at_once, $start){
 	include "inc/db.inc.php";
 	//Connect to DB.
 	try {
@@ -44,11 +44,12 @@ function fetch_comments($articles_id){
 		print "Error!: " . $e->getMessage() . "<br/>";
     	die();
 	}
-	$sql = "SELECT * FROM comments WHERE articles_id = '$articles_id' ORDER BY c_id DESC";
-
-		// Loop through returned results and store as an array.
 	$comments = NULL;
- 	foreach($db->query($sql) as $row) {
+	$query = "SELECT * FROM comments WHERE articles_id = '$articles_id' ORDER BY c_id DESC LIMIT ".$start.", ".$at_once."";
+	$sql = $db->prepare($query);
+  $sql->execute();
+  $res = $sql->fetchAll();
+ 	foreach($res as $row) {
  		$topic = $row['topic'];
  		if(empty($topic)){
  			if(mb_strlen($row['comment'])>15){

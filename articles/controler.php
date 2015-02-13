@@ -125,14 +125,10 @@ class Control{
 		include "inc/db.inc.php";
 		//Connect to DB.
 		try {
-
 			$db = new PDO ("$db_info", "$db_user", "$db_pass"); 
-		
 		} catch (PDOException $e) {
-
 			print "Error!: " . $e->getMessage() . "<br/>";
     		die();
-		
 		}
 		$i=NULL;
 		$sql = "SELECT * FROM articles";
@@ -140,6 +136,5 @@ class Control{
 			$i++;
 		}
 		return "$i";
-
-}
+	}
 }

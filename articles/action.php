@@ -39,83 +39,34 @@ class Article{
 	}
 
 	function current_article ($id, $db){
-
 		$sql = "SELECT * FROM articles WHERE articles_id = '".$id."'";
 		$cur=$db->query($sql);
 		$cur->execute();
 		$r=$cur->fetch();
 		$cur->closeCursor();
 		return $r;
-
 	}
 
 	function fetch_articles($start, $on_page, $db){
-
 		$articles = NULL;
-		$sql = "SELECT * FROM articles ORDER BY articles_id DESC LIMIT '$start', '$on_page'";
-		$sql = $db->prepare($sql);
-		$res = $sql -> execute($start, $on_page);
-		var_dump($res);
-		exit();
- 			/*
- 			$row = $db->prepare($sql);
- 			$row->execute(array($start, $on_page));
-			$row = $row->fetch();
-
-			$content = $row['articles_content'];
- 			$content_ua = $row['articles_content_ua'];
- 			
- 			//Cutting string order by 150 chars.
- 			if(mb_strlen($content)>150){
-
- 				$content = mb_substr($content, 0, 154);
-				$position = mb_strrpos($content, ' ', 'UTF-8');
-				$content = mb_substr($content, 0, $position);
-
-			}
-			if(mb_strlen($content_ua)>150){
-
- 				$content_ua= mb_substr($content_ua, 0, 154);
-				$position = mb_strrpos($content_ua, ' ', 'UTF-8');
-				$content_ua= mb_substr($content_ua, 0, $position);
-
-			}
-
- 			//Pushing cutted data in array.
- 			$articles[] = array(
- 				'articles_id' => $row['articles_id'],
- 				'articles_title' => $row['articles_title'],
- 				'articles_content' => $content,
- 				'articles_title_ua' => $row['articles_title_ua'],
- 				'articles_content_ua' =>$content_ua,
- 				'articles_author' => $row['articles_author'],
- 				'articles_data' => $row['articles_data']
- 			);
-*/		
- 	
-
- 		
- 		
+		$query = "SELECT * FROM articles ORDER BY articles_id DESC LIMIT  ".$start.", ".$on_page."";
+    $sql = $db->prepare($query);
+    $sql->execute();
+    $res = $sql->fetchAll();
  		foreach($res as $row) {
  			$content = $row['articles_content'];
  			$content_ua = $row['articles_content_ua'];
- 			
  			//Cutting string order by 150 chars.
  			if(mb_strlen($content)>150){
-
  				$content = mb_substr($content, 0, 154);
 				$position = mb_strrpos($content, ' ', 'UTF-8');
 				$content = mb_substr($content, 0, $position);
-
 			}
 			if(mb_strlen($content_ua)>150){
-
  				$content_ua= mb_substr($content_ua, 0, 154);
 				$position = mb_strrpos($content_ua, ' ', 'UTF-8');
 				$content_ua= mb_substr($content_ua, 0, $position);
-
 			}
-
  			//Pushing cutted data in array.
  			$articles[] = array(
  				'articles_id' => $row['articles_id'],
@@ -126,12 +77,7 @@ class Article{
  				'articles_author' => $row['articles_author'],
  				'articles_data' => $row['articles_data']
  			);
-
-			
  		} 
- 		
  		return $articles;
-
 	}
-	
 }
