@@ -10,35 +10,44 @@ include_once "translate/t.inc.php";
     <link href="css/main.css" rel="stylesheet" type = "text/css">
 </head>
 <body>
-    <div class="page_align b5radius">
-        <div class ="heder b5radius">
+    <div class ="flag">
+        <?php
+            include_once "inc/flags.inc.php";
+        ?>
+    </div>
+    <div class="page_align ">
+        
+        <div class ="heder">
             <?php
             include_once "inc/heder.inc.php";
-            include_once "log_and_reg/reg_and_log.php";
-            ?>
-
-        </div>
-        <div class="sidebar b5radius">
-            <?php
-            include_once "inc/sidebar.inc.php";
             ?>
         </div>
-        <div class="content b5radius">
+        <div class="content">
             <?php
             include_once "inc/u_content.inc.php";
             ?>
             <div class="clr"></div>
         </div>
-        <div class ="footer b5radius">
+        <div class ="footer">
             <?php
             include_once "inc/footer.inc.php";
             ?>
-            <div class="clr"></div>
         </div>
     
 
         <div class="clr"></div>
     </div>
+    <div class="sidebar">
+            <?php
+            include_once "inc/sidebar.inc.php";
+            ?>
+    </div>
+    <div class ="reg">
+        <?php
+            include_once "inc/reg.inc.php";
+        ?>
+    </div>
+    
 
 </body>
 </html>

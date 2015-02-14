@@ -10,17 +10,17 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
 
 ?>	
 
-	<div>
+	<div class ="curr_article">
 		<?php 
  		if(!isset($_SESSION['lang'])){
  		?>
- 		<div><p><?php echo $res['articles_title'] ?></p></div>
-		<div><p><?php echo $res['articles_content'].'...'; ?></p></div>
+ 		<div class ="maintext title"><p><?php echo $res['articles_title'] ?></p></div>
+		<div class ="maintext"><p><?php echo $res['articles_content'].'...'; ?></p></div>
 		<?php
 		}elseif (isset($_SESSION['lang']) and $_SESSION['lang'] == 'ua') {
 		?>
-		<div><p><?php echo (empty($res['articles_title_ua'])) ? $res['articles_title'] : $res['articles_title_ua']; ?></p></div>
-		<div><p><?php echo (empty($res['articles_content_ua'])) ? $res['articles_content'].'...' : $res['articles_content_ua'].'...'; ?></p></div>
+		<div class ="maintext title"><p><?php echo (empty($res['articles_title_ua'])) ? $res['articles_title'] : $res['articles_title_ua']; ?></p></div>
+		<div class ="maintext"><p><?php echo (empty($res['articles_content_ua'])) ? $res['articles_content'].'...' : $res['articles_content_ua'].'...'; ?></p></div>
 		<?php 
 		}
 		?>
@@ -60,6 +60,7 @@ if($rating['rating'] == 0){
 	echo t("Average rating");
 	echo " ";
 	echo $rating['rating'];
+	echo "<br>";
 }
 if($flag == true){
 if($rating['try'] == false){ ?>
@@ -113,8 +114,8 @@ if(isset($_SESSION['user'])){
   		
   		<input type ="hidden" value="<?php echo $res['articles_id'];?>" name="articles_id">
   		<input type ="hidden" value="<?php echo $_SESSION['user'];?>" name="c_author">
-  		<p><?php t("Theame"); ?>: <br><input type ="text" size ="75" name ="topic"></p>
-   		<p><?php t("Your comment"); ?>: <Br><textarea name="comment" cols="75" rows="3"></textarea></p>
+  		<p><?php t("Theame"); ?>: <br><input type ="text" size ="55" name ="topic"></p>
+  		<p><?php t("Your comment"); ?>: <Br><textarea name="comment" cols="55" rows="3"></textarea></p>
   		<p><input type="submit" name = "c_send"value="<?php t("Send"); ?>">
    		<input type="reset" value="<?php t("Clear"); ?>"></p>
  		</form>
@@ -159,12 +160,16 @@ if(isset($_SESSION['user'])){
 			<div><?php t("Author"); ?>: <?php echo $res['author']; ?><br> </div>
 			<div><?php t("Date of adding"); ?>: <?php echo date("F j, Y, g:i a",$res["time"]); ?><br> </div>
 			<?php
-			if (isset($_SESSION['admin']) || isset($_SESSION['user']) and $_SESSION['user'] == $res['author']){
-			?>
+			if (isset($_SESSION['admin'])){
+				?>
+				<a href="comm_votes/c_dell.php?c_dell=<?php echo $res['c_id']; ?>" class ="bott"><?php t("Delete"); ?></a>		
+				<?php	
+			}elseif (isset($_SESSION['user']) and $_SESSION['user'] == $res['author']) {
+				?>
 			<a href="comm_votes/c_dell.php?c_dell=<?php echo $res['c_id']; ?>" class ="bott"><?php t("Delete"); ?></a>		
 			<?php	
 			}
-
+		
 			?>
 		</div>
 
@@ -217,13 +222,13 @@ if(isset($_SESSION['user'])){
  	<?php 
  	if(!isset($_SESSION['lang'])){
  	?>
- 		<div><p><?php echo $res['articles_title'] ?></p></div>
-		<div><p><?php echo $res['articles_content']; ?></p></div>
+ 		<div class ="maintext"><p><?php echo $res['articles_title'] ?></p></div>
+		<div class ="maintext"><p><?php echo $res['articles_content']; ?></p></div>
 	<?php
 	}elseif (isset($_SESSION['lang']) and $_SESSION['lang'] == 'ua') {
 	?>
-		<div><p><?php echo (empty($res['articles_title_ua'])) ? $res['articles_title'] : $res['articles_title_ua']; ?></p></div>
-		<div><p><?php echo (empty($res['articles_content_ua'])) ? $res['articles_content'] : $res['articles_content_ua'].'...'; ?></p></div>
+		<div class ="maintext"><p><?php echo (empty($res['articles_title_ua'])) ? $res['articles_title'] : $res['articles_title_ua']; ?></p></div>
+		<div class ="maintext"><p><?php echo (empty($res['articles_content_ua'])) ? $res['articles_content'] : $res['articles_content_ua'].'...'; ?></p></div>
 	<?php 
 	}
 	?>

@@ -47,8 +47,7 @@ a{
 }
 .reg{
 	position: fixed;
-	margin-left: 83%;
-	margin-top: 22%;
+	top:65%; 
 	width: auto;
 	height: auto;
 }
@@ -62,13 +61,14 @@ a{
 	font:georgia;
 	font-size: 50px;
 }
-.logo2{
+.logo2{	
 	color: #939690;
 	text-align: center;
 	font:georgia;
 	font-size: 15px;
 }
 .sidebar{
+	top:35%;
 	font-size: 17px;
 	margin-top: -60px;
 	float: left;
@@ -84,18 +84,17 @@ a{
 	color: black;
 }
 .log_in{
+	font-size: 17px;
 	border: solid 1px #ACAEAB;
 	margin: 10px;
 	background: #8C8C8C;
 	padding: 2px;
 }
-.auth{
-	margin: 3px;
-}
 .auth a{
 	color: black;
 }
 #go_log{
+	font-size: 17px;
 	margin-right: 10px;
 	margin-left: 10px;
 	width: 90%;
@@ -107,12 +106,9 @@ a{
   height: 20px;
 }
 .content{
-	margin-top: 50px;
-	margin-bottom: 50px;
 	padding: 1%;
-	position: absolute;
+	width: 98%;
 	float: right;
-	width: 53%;
 	height: auto;
 	background: #C5C5C5;
 	margin: right;
@@ -145,12 +141,12 @@ a{
 
 }
 .footer{ 
+	position: relative;
 	bottom: 0px;
-	margin-left: 22.5%;
   text-align: center;
 	height: 20px;
 	background: #CCCCCC;
-	width: 55%;
+	width: 100%;
 	clear:both;
 }
 .footer:hover{
@@ -190,4 +186,60 @@ a{
 }
 .cent{
 	text-align: center;
+}
+.log_input{
+	padding: 5px;
+}
+.pager{
+	text-align: center;
+}
+.maintext{
+	font-size: 15px;
+}
+/*Registration*/
+.reg_div {
+	border: groove 4px gray;
+	margin-top: 18%;
+	margin-right: 38%;
+	margin-left: 38%;
+	text-align: center;
+}
+.reg_div input{
+	font-size: 17px;
+	border: solid 1px #ACAEAB;
+	margin: 10px;
+	background: gray;
+	padding: 2px;
+}
+::-webkit-input-placeholder {
+   color: black;
+   text-align: center;
+}
+:-moz-placeholder {
+   color: black;
+   position: center;
+}
+.autopos{
+	margin: auto;
+	padding: auto;
+}
+/*Current article*/
+.curr_article{
+	margin: 20px;
+} 
+.title{
+	text-align: center;
+	font-size: 18px;
+}
+/*User information*/
+.curr_user{
+	margin: 20px;
+}
+.user_img{
+	float: left;
+}
+.user_text{
+	padding: 10px;
+
+	float: right;
 }

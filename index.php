@@ -28,7 +28,11 @@ include_once "translate/t.inc.php";
             ?>
             <div class="clr"></div>
         </div>
-    
+        <div class ="footer">
+            <?php
+            include_once "inc/footer.inc.php";
+            ?>
+        </div>
 
         <div class="clr"></div>
     </div>
@@ -42,11 +46,7 @@ include_once "translate/t.inc.php";
             include_once "inc/reg.inc.php";
             ?>
     </div>
-    <div class ="footer">
-            <?php
-            include_once "inc/footer.inc.php";
-            ?>
-        </div>
+    
 
 </body>
 </html>

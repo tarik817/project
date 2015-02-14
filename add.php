@@ -1,7 +1,6 @@
 <?php
 session_start();
-if (isset($_SESSION['e_user'])) {
-    include_once "translate/t.inc.php";
+include_once "translate/t.inc.php";
 ?>
 <!DOCTYPE html>
 <html>
@@ -11,23 +10,23 @@ if (isset($_SESSION['e_user'])) {
     <link href="css/main.css" rel="stylesheet" type = "text/css">
 </head>
 <body>
-    <div class="page_align">
+    <div class ="flag">
+            <?php
+            include_once "inc/flags.inc.php";
+            ?>
+        </div>
+    <div class="page_align ">
+        
         <div class ="heder">
             <?php
             include_once "inc/heder.inc.php";
-            include_once "log_and_reg/reg_and_log.php";
-            ?>
-
-        </div>
-        <div class="sidebar">
-            <?php
-            include_once "inc/sidebar.inc.php";
             ?>
         </div>
         <div class="content">
             <?php
             include_once "inc/add_cont.inc.php";
             ?>
+            <div class="clr"></div>
         </div>
         <div class ="footer">
             <?php
@@ -38,11 +37,17 @@ if (isset($_SESSION['e_user'])) {
 
         <div class="clr"></div>
     </div>
+    <div class="sidebar">
+            <?php
+            include_once "inc/sidebar.inc.php";
+            ?>
+    </div>
+    <div class ="reg">
+        <?php
+            include_once "inc/reg.inc.php";
+            ?>
+    </div>
+    
 
 </body>
 </html>
-<?php
-}else{
-header("Location: index.php");
-}
-?>

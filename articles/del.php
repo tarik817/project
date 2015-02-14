@@ -1,5 +1,10 @@
 <?php
-if(isset($_GET['id'])&& is_numeric($_GET['id']) && isset($_SESSION['e_user'])){
+if(!isset($_SESSION)){
+	session_start();
+}
+echo $_SESSION['e_user'];
+if(isset($_GET['id']) && is_numeric($_GET['id']) && isset($_SESSION['e_user'])){
+
 
 	$id = $_GET['id'];
 	$d = del($id);

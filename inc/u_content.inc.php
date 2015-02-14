@@ -87,7 +87,6 @@ include_once "users/u_controler.php";
 	$obj = new GetUser();
 	$res = $obj->expres_u($id);
 	$position = $obj->check_acses($res['users_name']);
-
 	if(!empty($res['u_img'])){
 		$img = $res['u_img'];
 	}else{
@@ -96,7 +95,8 @@ include_once "users/u_controler.php";
 	}
 
 	?>
-<div>
+	<div class = "curr_user">
+<div class = "user_text">
 	<p><?php t("Nik-name"); ?><br><?php echo $res['users_name']; ?></p><br>
 	<p><?php t("Position"); ?><br><?php echo "$position"; ?></p><br>
 	<p><?php t("First name"); ?><br><?php echo $res['u_fir_name']; ?></p><br>
@@ -108,13 +108,12 @@ include_once "users/u_controler.php";
 	<?php 
 	}
 	?>
-
-	<p><?php t("Avatar"); ?><br><img src="<?php echo "$src"?>" /><br><?php echo $img; ?><br></p>
-
-</div>
-
+	</div>
+	<div class ="user_img">
+		<p><?php t("Avatar"); ?><br><img src="<?php echo "$src"?>" /><br><?php echo $img; ?><br></p>
+	</div>
+	</div>
 <?php
-
 }
 //Edite current user.
 elseif(isset($_SESSION['user']) and isset($_GET['ed']) and $_SESSION['user'] == $_GET['ed'] || isset($_SESSION['admin'])  && !isset($_SESSION['anonim'])){
@@ -130,8 +129,6 @@ elseif(isset($_SESSION['user']) and isset($_GET['ed']) and $_SESSION['user'] == 
 	}else{
 		$img ="No avatar yet.";
 	}
-
-///додати перевірку для пароля//////
 ?>
 <form method ="post" action ="users/u_controler.php"> 
 	<p><?php t(""); ?>Nik-name<br><?php echo $res['users_name']; ?></p><br>
