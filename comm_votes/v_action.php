@@ -16,15 +16,20 @@ class Vote
             print "Error!: " . $e->getMessage() . "<br/>";
             die();
         }
-        $sql = "SELECT * FROM votes WHERE user ='" . $user . "' AND articles_id = '" . $articles_id . "'";
-        $r = $db->query($sql);
+        $sql = "SELECT * FROM votes WHERE user = :user AND articles_id = :articles_id";
+        $r = $db->prepare($sql);
+        $r->bindParam(':user', $user);
+        $r->bindParam(':articles_id', $articles_id);
         $r->execute();
         $resulte = $r->fetch();
         if ($resulte['id'] == 0 or $q == false) {
-            $sql = "INSERT INTO votes(user, articles_id, vote_rating) VALUES ('$user', '$articles_id', '$vote')";
-            $push = $db->prepare($sql);
-            $res = $push->execute(array($user, $articles_id, $vote));
-            $push->closeCursor();
+            $sql = "INSERT INTO votes(user, articles_id, vote_rating) VALUES (:user, :articles_id, :vote)";
+            $r = $db->prepare($sql);
+            $r->bindParam(':user', $user);
+            $r->bindParam(':articles_id', $articles_id);
+            $r->bindParam(':vote', $vote);
+            $res = $r->execute();
+            $r->closeCursor();
             return $vote;
         } else {
             return false;
@@ -41,8 +46,10 @@ class Vote
             die();
         }
         $user = $_SESSION['user'];
-        $sql = "SELECT * FROM votes WHERE user ='$user' and articles_id = '$articles_id'";
+        $sql = "SELECT * FROM votes WHERE user =:user and articles_id = :articles_id";
         $r = $db->prepare($sql);
+        $r->bindParam(':user', $user);
+        $r->bindParam(':articles_id', $articles_id);
         $r->execute();
         $resulte2 = $r->fetch();
         $vote_rating = $resulte2['vote_rating'];
@@ -65,8 +72,9 @@ class Vote
             print "Error!: " . $e->getMessage() . "<br/>";
             die();
         }
-        $sql = "SELECT * FROM votes WHERE articles_id ='" . $articles_id . "'";
+        $sql = "SELECT * FROM votes WHERE articles_id = :articles_id";
         $r = $db->prepare($sql);
+        $r->bindParam(':articles_id', $articles_id);
         $r->execute();
         while ($resulte3 = $r->fetch()) {
             $resulte3 = $resulte3['vote_rating'];
@@ -96,10 +104,11 @@ class Vote
             die();
         }
 
-        $sql = "DELETE FROM votes WHERE user = '$user' AND articles_id = '$articles_id' LIMIT 1";
+        $sql = "DELETE FROM votes WHERE user = :user AND articles_id = :articles_id LIMIT 1";
 
         $del = $db->prepare($sql);
-        $res = $del->execute(array($user, $articles_id,));
+        $del->bindParam(':articles_id', $articles_id);
+        $res = $del->execute();
         if ($res) {
             return true;
         } else {

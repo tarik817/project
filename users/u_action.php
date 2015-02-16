@@ -5,8 +5,9 @@ class User
     function get_user($name, $db)
     {
 
-        $sql = "SELECT * FROM users WHERE users_name = '" . $name . "'";
-        $res = $db->query($sql);
+        $sql = "SELECT * FROM users WHERE users_name = :name";
+        $res = $db->prepare($sql);
+        $res->bindParam(':name', $name);
         $res->execute();
         $r = $res->fetch();
         $res->closeCursor();
@@ -20,20 +21,28 @@ class User
 
         $sql = "UPDATE users
 		SET 
-		users_email = '$email',
-		users_pass = '$pass',
-		users_data = $time,
-		u_fir_name = '$fir_name',
-		u_sec_name = '$sec_name',
-		u_position = $u_position,
-		u_img = '$u_img',
-		u_log = '$time'
+		users_email = :email,
+		users_pass = :pass,
+		users_data = :time,
+		u_fir_name = :fir_name,
+		u_sec_name = :sec_name,
+		u_position = :u_position,
+		u_img = :u_img,
+		u_log = :time
 
-		WHERE users_name = '$name'";
+		WHERE users_name = :name";
 
-        $push = $db->prepare($sql);
-        $res = $push->execute(array($name, $fir_name, $sec_name, $email, $pass, $u_img, $u_position));
-        $push->closeCursor();
+        $res = $db->prepare($sql);
+        $res->bindParam(':name', $name);
+        $res->bindParam(':fir_name', $fir_name);
+        $res->bindParam(':sec_name', $sec_name);
+        $res->bindParam(':email', $email);
+        $res->bindParam(':pass', $pass);
+        $res->bindParam(':time', $time);
+        $res->bindParam(':u_img', $u_img);
+        $res->bindParam(':u_log', $u_log);
+        $res->bindParam(':u_position', $u_position);
+        $res = $res->execute();
 
         if ($res == true) {
             return true;
@@ -41,28 +50,6 @@ class User
             return false;
         }
     }
-    function push()
-    {
-        $time = time();
-
-        $sql = "UPDATE users
-		SET users_name = '$title',
-		articles_content = '$content',
-		articles_data = '$time' 
-		WHERE articles_id = '$id'";
-
-        $push = $db->prepare($sql);
-        $res = $push->execute(array($title, $content, $time));
-        $push->closeCursor();
-
-        if ($res == true) {
-            return true;
-        } else {
-            return false;
-        }
-
-    }
-
     function fetch_users($db)
     {
         $users = NULL;
@@ -92,8 +79,9 @@ class User
 
     function acses($name, $db)
     {
-        $sql = "SELECT u_position FROM users WHERE users_name = '" . $name . "'";
-        $res = $db->query($sql);
+        $sql = "SELECT u_position FROM users WHERE users_name = :name";
+        $res = $db->prepare($sql);
+        $res->bindParam(':name', $name);
         $res->execute();
         $r = $res->fetch();
         $r = $r['u_position'];

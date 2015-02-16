@@ -298,3 +298,6 @@ a {
     margin: 3px;
     clear: both;
 }
+#LogForm{
+    display : none;
+}

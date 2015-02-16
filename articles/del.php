@@ -28,9 +28,10 @@ function del($id)
         die();
     }
 
-    $sql = "DELETE FROM articles WHERE articles_id = $id LIMIT 1";
+    $sql = "DELETE FROM articles WHERE articles_id = :id LIMIT 1";
 
     $del = $db->prepare($sql);
+    $del->bindParam(':id', $id);
     $del->execute();
 
 }

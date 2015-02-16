@@ -4,7 +4,7 @@ include_once "translate/t.inc.php";
 if (isset($_GET['id']) && is_numeric($_GET['id'])) {
 
 //Display curren article.
-include_once("articles/controler.php");
+include ("articles/controler.php");
 $obj = new Control();
 $res = $obj->expres($_GET['id']);
 
@@ -20,6 +20,7 @@ $res = $obj->expres($_GET['id']);
         <?php
         } elseif (isset($_SESSION['lang']) and $_SESSION['lang'] == 'ua') {
             ?>
+        <div>
             <div class="maintext title">
                 <p><?php echo (empty($res['articles_title_ua'])) ? $res['articles_title'] : $res['articles_title_ua']; ?></p>
             </div>
@@ -51,6 +52,7 @@ $res = $obj->expres($_GET['id']);
             ?>
         </div>
     </div>
+</div>
     <!--Votes part-->
     <div class="vote">
         <?php
@@ -150,7 +152,7 @@ $res = $obj->expres($_GET['id']);
             $i++;
         }
         $count_c = $i;
-        $pages = ceil($count_c / $at_once);
+        $pages = ceil(($count_c - 1) / $at_once);
         $curr_c_page = isset($_GET['comment']) ? $_GET['comment'] : 1;
         if ($curr_c_page < 1) {
             $curr_c_page = 1;

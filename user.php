@@ -5,7 +5,7 @@ include_once "translate/t.inc.php";
 <!DOCTYPE html>
 <html>
 <head>
-    <title><?php t("Test"); ?></title>
+    <title><?php t('Test'); ?></title>
     <meta charset="utf-8">
     <link href="css/main.css" rel="stylesheet" type="text/css">
 </head>
@@ -33,7 +33,6 @@ include_once "translate/t.inc.php";
         include_once "inc/footer.inc.php";
         ?>
     </div>
-
 
     <div class="clr"></div>
 </div>

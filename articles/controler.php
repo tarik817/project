@@ -1,10 +1,7 @@
 <?php
 if (!isset($_SESSION)) {
-
     session_start();
-
 }
-
 if (isset($_POST['add_article']) && isset($_POST['update']) && is_numeric($_POST['update'])) {
 
     include_once "action.php";
@@ -45,6 +42,8 @@ if (isset($_POST['add_article']) && isset($_POST['update']) && is_numeric($_POST
     //Sanitizing data.
     $title = htmlspecialchars($title);
     $content = htmlspecialchars($content);
+    $title_ua = htmlspecialchars($title_ua);
+    $content_ua = htmlspecialchars($content_ua);
 
     //Connect to DB.
     try {
@@ -62,27 +61,20 @@ if (isset($_POST['add_article']) && isset($_POST['update']) && is_numeric($_POST
         $id_obj = $db->query("SELECT LAST_INSERT_ID()");
         $id = $id_obj->fetch();
         $id_obj->closeCursor();
-        header("Location: ../?id=" . $id[0]);
+        
+        header("Location: ../?id=$id[0]");
         exit();
-
     }
-
 }
-
 class Control
 {
-
     function expres($id)
     {
-
         include_once "action.php";
         include "inc/db.inc.php";
         try {
-
             $db = new PDO ("$db_info", "$db_user", "$db_pass");
-
         } catch (PDOException $e) {
-
             print "Error!: " . $e->getMessage() . "<br/>";
             die();
         }
@@ -90,29 +82,20 @@ class Control
         $res = $obj->current_article($id, $db);
         return $res;
     }
-
     function expres_all($start, $on_page)
     {
-
         include "action.php";
         include "inc/db.inc.php";
-
         //Connect to DB.
         try {
-
             $db = new PDO ("$db_info", "$db_user", "$db_pass");
-
         } catch (PDOException $e) {
-
             print "Error!: " . $e->getMessage() . "<br/>";
             die();
-
         }
-
         $obj = new Article();
         $articles = $obj->fetch_articles($start, $on_page, $db);
         return $articles;
-
     }
 
     function count_a()

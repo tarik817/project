@@ -1,5 +1,7 @@
 <?php
 session_start();
+if (isset($_SESSION['e_user'])) {
+    # code...
 include_once "translate/t.inc.php";
 ?>
 <!DOCTYPE html>
@@ -51,3 +53,8 @@ include_once "translate/t.inc.php";
 
 </body>
 </html>
+<?php
+}else{
+    header("Location: index.php");
+}
+?>

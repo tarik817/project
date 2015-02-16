@@ -2,7 +2,7 @@
 /*
 Function for get translete text of the DB.
 */
-function t($text)
+function t($t)
 {
     //Conect to DB.
     include "inc/db.inc.php";
@@ -13,33 +13,36 @@ function t($text)
         die();
     }
     //Check variable.
-    $sql = "SELECT t_eng FROM lang WHERE t_eng = '$text'";
-    $t = $db->query($sql);
-    $t->execute();
-    $res = $t->fetch();
+    $sql = "SELECT t_eng FROM lang WHERE t_eng = :t";
+    $rt = $db->prepare($sql);
+    $rt->bindParam(':t', $t);
+    $rt->execute();
+    $res = $rt->fetch();
     $res = $res['t_eng'];
     if (empty($res)) {
         //Insert in BD cheked values if its empty.
-        $sql = "INSERT INTO lang (t_eng) VALUES ('$text')";
+        $sql = 'INSERT INTO lang (t_eng) VALUES (:t)';
         $put = $db->prepare($sql);
-        $res = $put->execute(array($text));
+        $put->bindParam(':t', $t);
+        $res = $put->execute();
         $put->closeCursor();
     }
     //Languege marker.
     if (isset($_SESSION['lang'])) {
         if ($_SESSION['lang'] == 'ua') {
             //Get UA translation.
-            $sql = "SELECT t_ua FROM lang WHERE t_eng = '$text'";
-            $t = $db->query($sql);
-            $t->execute();
-            $res = $t->fetch();
+            $sql = "SELECT t_ua FROM lang WHERE t_eng = :t";
+            $rt = $db->prepare($sql);
+            $rt->bindParam(':t', $t);
+            $rt->execute();
+            $res = $rt->fetch();
             $res = $res['t_ua'];
             //Checking presenting of translation.
             if (!empty($res)) {
-                $text = $res;
+                $t = $res;
             }
         }
     }
-    echo $text;
+    echo $t;
 
 }

@@ -32,7 +32,6 @@ if (isset($_GET['me']) and isset($_SESSION['user'])) {
         </div>
     </div>
     <?php
-    exit();
 }
 //Display list of users.
 if (isset($_GET['display'])) {
@@ -72,10 +71,7 @@ if (isset($_GET['display'])) {
             </div>
         <?php
         }
-    } else {
-        exit("something go wrong..");
     }
-    exit();
 }
 //Display chosen user.
 if (isset($_GET['id'])) {
@@ -112,8 +108,12 @@ if (isset($_GET['id'])) {
     <?php
     
 } //Edite current user.
-elseif (isset($_SESSION['user']) and isset($_GET['ed']) and $_SESSION['user'] == $_GET['ed'] and !isset($_SESSION['anonim']) or isset($_SESSION['admin'])) {
+elseif ((isset($_SESSION['user']) 
+    && isset($_GET['ed']) 
+    && $_SESSION['user'] == $_GET['ed'] 
+    && !isset($_SESSION['anonim'])) || isset($_SESSION['admin']) && isset($_GET['ed'])) {
     include_once "users/u_controler.php";
+    
     $user = $_GET['ed'];
     $obj = new GetUser();
     $res = $obj->expres_u($user);
@@ -131,7 +131,7 @@ elseif (isset($_SESSION['user']) and isset($_GET['ed']) and $_SESSION['user'] ==
         if (isset($_SESSION['admin'])) {
             ?>
             <div>
-                <p><?php t("Current position"); ?>:<br>
+                <p><?php t("Current position"); ?>:<br><?php echo $position; ?><br>                    
                     <select name="u_position">
                         <option disabled><?php echo $position; ?></option>
                         <option value="1"><?php t("User"); ?></option>
@@ -168,6 +168,6 @@ elseif (isset($_SESSION['user']) and isset($_GET['ed']) and $_SESSION['user'] ==
     </form>
 <?php
 } else {
-    header("Location: index.php");
+    //header("Location: index.php");
 }
 ?>
