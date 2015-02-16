@@ -235,7 +235,6 @@ a {
 .bord {
     border: solid 1px #D6D6D6;
 }
-
 /*Registration*/
 .reg_div {
     border: groove 4px gray;
@@ -257,42 +256,33 @@ a {
     color: black;
     text-align: center;
 }
-
 :-moz-placeholder {
     color: black;
     position: center;
 }
-
 .autopos {
     margin: auto;
     padding: auto;
 }
-
 /*Current article*/
 .curr_article {
     margin: 20px;
 }
-
 .title {
     text-align: center;
     font-size: 18px;
 }
-
 /*User information*/
 .curr_user {
     margin: 20px;
 }
-
 .user_img {
     float: left;
 }
-
 .user_text {
     padding: 10px;
-
     float: right;
 }
-
 .ed {
     bottom: 0px;
     margin: 3px;
@@ -300,4 +290,16 @@ a {
 }
 #LogForm{
     display : none;
+}
+.error{
+    color: white;
+}
+.go_main{
+    background: #808080;
+    margin-top: 10px;
+    color: black;
+    padding: 3px;
+    font-size: 17px;
+    border: solid 1px #ACAEAB;
+    margin: 10px;
 }

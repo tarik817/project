@@ -10,8 +10,8 @@ if (!isset($_SESSION)) {
     if (isset($_SESSION['user'])){
         ?>
         <div class="log2"><a href="user.php?me=<?php echo $_SESSION['user']; ?>"><p
-                    class="log_in"><?php echo $_SESSION['user']; ?></p></a>
-            <a class="log_in" href="log_and_reg/exit.php">Exit</a><br>
+                    class="log_in"><img src="img/143.png" alt="GO" width ="15" higth ="15"><?php echo $_SESSION['user']; ?></p></a>
+            <a class="log_in" href="log_and_reg/exit.php"><img src="img/011.png" alt="GO" width ="15" higth ="15"> Exit</a><br>
         </div>
     <?php
     }else{
@@ -26,8 +26,8 @@ if (!isset($_SESSION)) {
         }
         if (!isset($_SESSION['user'])){
         ?>
-        <p><button class="log_in cent" id="hide" ><?php t('Log in') ?></button></p>
-        <p class="log_in cent"><a href="reg.php"><?php t('Registration') ?></a></p>
+        <p><button class="log_in cent" id="login_butt" ><img src="img/004.png" alt="GO" width ="15" higth ="15"> <?php t('Log in') ?></button></p>
+        <p class="log_in cent"><a href="reg.php"><img src="img/141.png" alt="GO" width ="15" higth ="15"> <?php t('Registration') ?></a></p>
     </div>
 <?php
 }
@@ -35,8 +35,8 @@ if (!isset($_SESSION)) {
 </div> 
 <script>
 $(document).ready(function(){
-    $("#hide").click(function(){
-        $("#LogForm").toggle();
+    $("#login_butt").click(function(){
+        $("#LogForm").toggle("slow");
         return false;
     });
 });
